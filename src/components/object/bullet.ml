@@ -27,7 +27,7 @@ let iaBullet_unregister (id_ : id) =
     | None -> failwith "Id not found"
   in 
   Global.(pop_ai (id_)); 
-  (*Collision_system.(unregister (instance :> t));*)
+  Collision_system.(unregister (instance :> t));
   Destruction_system.(unregister (instance :> t)); 
   Draw_system.(unregister (instance :> t)); 
   Ai_system.(unregister (instance :> t));
@@ -42,7 +42,7 @@ let bullet_stateMachine(id_ : id) =
   in 
   (*If the bullet damaged something and is in contact : immediately self destroy*)
   let result = (instance#impactInfo#get) in 
-  if not(List.is_empty result) then 
+  if false && not(List.is_empty result) then 
     iaBullet_unregister(id_)  
   else 
   ()

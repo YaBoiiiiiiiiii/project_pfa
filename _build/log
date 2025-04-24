@@ -1,0 +1,16 @@
+# dune exec ./prog/game_sdl.exe
+# OCAMLPARAM: unset
+# Shared cache: enabled-except-user-rules
+# Shared cache location: /home/kaiji/.cache/dune/db
+# Workspace root: /home/kaiji/Documents/code/project/PFA/project_pfa
+# Auto-detected concurrency: 4
+# Dune context:
+#  { name = "default"
+#  ; kind = "default"
+#  ; profile = Release
+#  ; merlin = true
+#  ; fdo_target_exe = None
+#  ; build_dir = In_build_dir "default"
+#  ; instrument_with = []
+#  }
+$ /home/kaiji/.opam/5.2.0/bin/ocamlc.opt -config > /tmp/dune_46c67f_output
