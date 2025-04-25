@@ -12,16 +12,14 @@ let rec iter_pairs f s =
     Seq.iter (fun e' -> f e e') s';
     iter_pairs f s'
 
-
-
 let update _ el =
 
   let setImpactInfo instance data = 
     instance#impactInfo#set (data::(instance#impactInfo#get))
   in
 
-  let compareTag (a) (b) = 
-    if a = b then 
+  let compareTag (a : tag) (b : tag) = 
+    if (tagToInt a) = (tagToInt b) then 
       true
     else 
       false
@@ -52,6 +50,7 @@ let update _ el =
 
 
       (*Change HealthPoint/Damage attributes and ImpactInfo on Hitbox/HurtBox interraction*)
+      (*check if e1 is hit by e2*)
       match Rect.rebound pos_hurtBox_1 hurtbox_1 pos_hitBox_2 hitbox_2 with
         None -> ()
       | Some v -> (*Contact*)
@@ -61,21 +60,22 @@ let update _ el =
         |Some _ -> () 
         |None ->
           begin
-            e2#healthPoint#set (e2#healthPoint#get -. e1#damage#get) ;
+            e1#healthPoint#set (e1#healthPoint#get -. e2#damage#get) ;
             setImpactInfo e2 e1#tag#get ; 
           end 
       ;
          
-
+      (*check if e2 is hit by e1*)
       match Rect.rebound pos_hurtBox_2 hurtbox_2 pos_hitBox_1 hitbox_1 with
         None -> ()
       | Some v -> (*Contact*)
         let oper = compareTag e2#tag#get in 
+        (*If e2's tag is in e1's protectedTag list : skip*)
         match (List.find_opt(oper)(e1#protectedTag#get)) with 
         |Some _ -> () 
         | None ->
           begin
-            e1#healthPoint#set (e1#healthPoint#get -. e2#damage#get) ;
+            e2#healthPoint#set (e2#healthPoint#get -. e1#damage#get) ;
             setImpactInfo e1 e2#tag#get ; 
           end 
         ;

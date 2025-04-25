@@ -42,10 +42,10 @@ let bullet_stateMachine(id_ : id) =
   in 
   (*If the bullet damaged something and is in contact : immediately self destroy*)
   let result = (instance#impactInfo#get) in 
-  if false && not(List.is_empty result) then 
-    iaBullet_unregister(id_)  
+  if not(List.is_empty result) then 
+    iaBullet_unregister(id_) 
   else 
-  ()
+    ()
 ;;
 
 let create_bullet (x, y, normalisedFiringDirection, cst_protectedTag) =
@@ -53,6 +53,7 @@ let create_bullet (x, y, normalisedFiringDirection, cst_protectedTag) =
   e#id#set Global.(new_ID ()) ; 
   e#tag#set Bullet;
   e#protectedTag#set cst_protectedTag;
+  e#impactInfo#set [];
 
   let Global.{ctx} = Global.get () in 
   let cst_texture = Texture.loadImage (ctx) (cst_textureLink) in 

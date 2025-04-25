@@ -23,12 +23,12 @@ let cst_dmg : float = 10.0
 
 let cst_hurtBox : Rect.t = Rect.{width=48; height=48}
 let cst_relativeHurtBox : Vector.t = Vector.{x= 0.0; y = 0.0}
-let cst_hp : float = 10.0
+let cst_hp : float = 250.0
 
 let cst_behavior : int = 0 
 
 (*drone's specific variables/constants*)
-let cst_detectionRange : float = 300.0
+let cst_detectionRange : float = 600.0
 
 let to_enum (args : int) = 
   match args with 
@@ -45,7 +45,6 @@ let to_int (args : state) =
 
 let const_unregister (instance) = 
   Global.(pop_ai (instance :> id)); 
-  Collision_system.(unregister (instance :> t)); 
   Destruction_system.(unregister (instance :> t)); 
   Draw_system.(unregister (instance :> t)); 
   Ai_system.(unregister (instance :> t));
@@ -69,7 +68,7 @@ let stateMachine_drone (id_ : id) =
   in 
   let current_behavior : state = (to_enum (instance#behavior#get)) in  
 
-  if (instance#healthPoint#get = 0.0) then 
+  if (instance#healthPoint#get <= 0.0) then 
     const_unregister instance  
 
   else 

@@ -69,6 +69,16 @@ type tag += HWall
 type tag += VWall 
 type tag += Bullet
 
+(*Translate tag to int for simplicity sake*)
+let tagToInt (tag_ : tag) = 
+  match tag_ with 
+  |Body -> 0 
+  |Null_ -> 1
+  |Player -> 2 
+  |Bullet -> 3 
+  | _ -> failwith "Not initialised"
+;;
+
 class tagged () =
   let r = Component.init Null_ in
   object

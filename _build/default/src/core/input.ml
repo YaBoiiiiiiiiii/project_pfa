@@ -88,4 +88,8 @@ let () =
   in
   register "f" (fun() ->auxilary ()); 
 ;;
-(*(p#position#get).x, (p#position#get).y*)
+
+(*
+(p#position#get).x, (p#position#get).y
+Format.eprintf "true"; 
+*)

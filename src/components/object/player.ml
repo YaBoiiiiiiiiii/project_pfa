@@ -4,7 +4,7 @@ open System_defs
 
 
 (*type tag += Player*)
-let cst_tag = Body 
+let cst_tag = Player
 
 
 let cst_textureLink = "resources/images/man.png"

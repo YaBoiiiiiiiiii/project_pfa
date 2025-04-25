@@ -22,7 +22,6 @@ let update _ seqElement =
     let x_ = result.x *. (100.0 -. Cst.slowDownCoeff ) in 
     e#forces#set Vector.{x = x_; y = !y_}; 
     e#velocity#set (Vector.add Vector.{x = x_; y = !y_} e#velocity#get);
-    Format.eprintf "%a\n%!" Vector.pp e#velocity#get;
   in 
 
   Seq.iter (auxilary) seqElement; 
