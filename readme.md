@@ -121,3 +121,5 @@ Un système de sauvegarde avait été prévu et développé, mais a été abando
 ## Remarques
 
 Le code pour créer les instances d’IA n’est pas très propre : beaucoup de variables inutiles dans les fichiers concernés.
+
+ce fichier MD est basé sur un premier rapport enregistré sur PDF, qu'on a décider de faire tradurie en un fichier MD par une IA (Le contenu de ces deux est exactement le même)
