@@ -75,14 +75,17 @@ let stateMachine_drone (id_ : id) =
     let Global.{player; _ } = Global.get() in 
     let vector_toPlayer : Vector.t = (Vector.sub player#position#get instance#position#get) in
     match current_behavior with 
+    (*No player nearby : remain still*)
     | Idle -> 
         let distance_toPlayer : float = Vector.norm vector_toPlayer in
         if distance_toPlayer >= cst_detectionRange then 
           ()
         else 
+        (*A player has been detected nearby : transition to Attack*)
         instance#behavior#set (to_int Attack);
       
     | Attack -> 
+        (*Use the vector between this Drone's position and the Player's position to determine the path*)
         let distance_toPlayer : float = Vector.norm vector_toPlayer in
         if distance_toPlayer >= cst_detectionRange then 
           instance#behavior#set (to_int Idle) 
@@ -122,7 +125,7 @@ let ready (name, x, y) =
   e#state_machine#set (stateMachine_drone) ; 
   e#unregister#set iaDrone_unregister; 
 
-  Collision_system.(register (e :> t)); 
+  (*Collision_system.(register (e :> t)); *)
   Destruction_system.(register (e :> t)); 
   Draw_system.(register (e :> t)); 
   Ai_system.(register (e :> t)); 

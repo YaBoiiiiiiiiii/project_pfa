@@ -27,7 +27,7 @@ let iaBullet_unregister (id_ : id) =
     | None -> failwith "Id not found"
   in 
   Global.(pop_ai (id_)); 
-  Collision_system.(unregister (instance :> t));
+  (*Collision_system.(unregister (instance :> t));*)
   Destruction_system.(unregister (instance :> t)); 
   Draw_system.(unregister (instance :> t)); 
   Ai_system.(unregister (instance :> t));

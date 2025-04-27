@@ -21,9 +21,10 @@ let get () : t =
   | Some s -> s
 ;;
 
+(*Timer that track the time when the last bullet was fired. Initially -100 seconds*)
 let chrono_bullet : float ref = ref (-.100.0)
 
-
+(*Assign a unique Int64 integer to any instance with an id field*)
 let global_id = ref Int64.zero 
 
 (*Hands out a new unique Integer as an ID : Does not recycle value, since int64 is "big enough" *)
@@ -65,14 +66,14 @@ let clean_ai () =
 ;;
 
 
-
+(*Assign a texture to an object : call this function after Global has been initialised*)
 let postGlobalCreation_assignTexture p cst_textureLink= 
   let ctx = (get()).ctx in 
   let cst_texture = Texture.loadImage (ctx) (cst_textureLink) in 
   p#texture#set cst_texture ;
 ;;
 
-
+(*Same as above but for platform*)
 let rec assignPlatformTexture (instance : block list) link =
   match instance with
   | [] -> ()

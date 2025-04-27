@@ -21,6 +21,7 @@ class brake() =
 
 (*If true, ajust the velocity of an instance to avoid it overshooting a collidable through sheer speed*)
 (*Expensive to compute*)
+(*Not implemented*)
 class requiresRayCast () = 
   let r = Component.init false in 
   object 
@@ -127,12 +128,14 @@ class healthPoint() =
     method healthPoint = r 
   end 
 
+(*Reajuste the position of the Hitbox from the Instance's coordinate*)
 class relativeHitBox() = 
   let r = Component.init (Vector.zero) in 
   object 
     method relativeHitBox = r 
   end 
 
+(*Same as above, for the Hurtbox*)
 class relativeHurtBox() = 
   let r = Component.init (Vector.zero) in 
   object 
@@ -154,32 +157,34 @@ class protectedTag() =
   end
 
 (*IA related component*)
-class behavior() = (*Index, indicates which "behavior" to use in the state_machine*)
+(*Index, indicates which "behavior" to use in the state_machine*)
+class behavior() = 
     let r = Component.init (0) in 
     object 
       method behavior = r 
     end 
 
 
-class id() = (*Unique int64 attributed to each ia instance*)
+(*Unique int64 attributed to each ia instance*)
+class id() = 
     let  r = Component.init (Int64.one) in 
     object 
       method id = r
     end 
 
-
-class state_machine() = (*Define the behavior for an ia instance*)
+(*Define the behavior for an ia instance*)
+class state_machine() = 
     let r = Component.init ( fun (_ : id) -> ()  ) in 
     object 
       method state_machine = r 
     end 
 
-
-  class unregister() = (*Allows a class instance to delete itself.*)
-    let  r = Component.init (fun (_ : id) -> ()) in 
-    object 
-      method unregister = r 
-    end 
+(*Allows a class instance to delete itself.*)
+class unregister() = 
+  let  r = Component.init (fun (_ : id) -> ()) in 
+  object 
+    method unregister = r 
+  end 
 
 
 
@@ -224,6 +229,7 @@ class type drawable =
     inherit texture
   end
 
+(*Instance that has a Hurtbox/Hitbox and can be damaged*)
 class type destructible = 
   object 
     inherit Entity.t 
@@ -243,6 +249,7 @@ class type destructible =
 
   end 
 
+(*Any instances that requires a specific logic loop*)
 class type ai = 
   object 
     inherit Entity.t 
@@ -256,6 +263,7 @@ class type ai =
   end 
 
 (** Real objects *)
+(*Pseudo-abstract class that allows you to implement an instance with an IA loop*)
 class abstract_ai name  = 
   object 
     inherit Entity.t ~name()
