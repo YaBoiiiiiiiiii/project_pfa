@@ -28,7 +28,7 @@ let cst_hp : float = 250.0
 let cst_behavior : int = 0 
 
 (*drone's specific variables/constants*)
-let cst_detectionRange : float = 600.0
+let cst_detectionRange : float = 300.0
 
 let to_enum (args : int) = 
   match args with 

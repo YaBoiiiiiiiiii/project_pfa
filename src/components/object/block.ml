@@ -3,6 +3,11 @@ open Component_defs
 open System_defs
 
 
+
+let cst_blockLink ="resources/images/platform.png"
+
+
+
 let create (x, y, v, txt, width, height, mass) =
   let e = new block () in
   e#texture#set txt;
@@ -32,6 +37,21 @@ let layout_1 () =
   List.map create Cst.[
   (0, 575, Vector.zero, Texture. azure, 800 , 25, infinity); 
   (0, 0, Vector.zero, Texture. azure, 25,  600, infinity); 
-  (775, 0, Vector.zero, Texture. azure, 25 , 600, infinity); 
+  (775, 0, Vector.zero, Texture. azure, 25 , 600, infinity)
+  ]
+;;
+
+(*Platforms list*)
+let platforms () =
+  List.map create Cst.[
+    (100, 480, Vector.zero, Texture.black, 200, 25, infinity);
+    (300, 400, Vector.zero, Texture.black, 100, 25, infinity);
+    (450, 470, Vector.zero, Texture.black, 250, 25, infinity);
+    (100, 320, Vector.zero, Texture.black, 180, 25, infinity);
+    (400, 300, Vector.zero, Texture.black, 120, 25, infinity);
+    (500, 200, Vector.zero, Texture.black, 170, 25, infinity);
+    (80, 210, Vector.zero, Texture.black, 100, 25, infinity);
+    (250, 100, Vector.zero, Texture.black, 200, 25, infinity);
+    
   ]
 ;;

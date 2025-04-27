@@ -23,7 +23,7 @@ let cst_hp = 150.0
 let cst_dmg = 0.0
 
 (*Player specific variables/constants*)
-let cst_jumpPush = -25.0
+let cst_jumpPush = -30.0
 
 let create_player (x, y,name) =
   let e = new player name in

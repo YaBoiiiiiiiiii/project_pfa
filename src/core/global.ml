@@ -8,6 +8,7 @@ type t = {
   crosshair : crosshair ; 
   mutable waiting : int;
   mutable list_ai : abstract_ai list ;
+  mutable list_block : block list ;
 }
 
 let state = ref None
@@ -65,9 +66,17 @@ let clean_ai () =
 
 
 
-
 let postGlobalCreation_assignTexture p cst_textureLink= 
   let ctx = (get()).ctx in 
   let cst_texture = Texture.loadImage (ctx) (cst_textureLink) in 
   p#texture#set cst_texture ;
+;;
+
+
+let rec assignPlatformTexture (instance : block list) link =
+  match instance with
+  | [] -> ()
+  | b :: q -> 
+    postGlobalCreation_assignTexture (b :> texture) link;
+    assignPlatformTexture q link;
 ;;

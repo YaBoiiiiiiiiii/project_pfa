@@ -25,22 +25,22 @@ let handle_input () =
 
 let () =
 (*Crosshair's movement*)
-  register "i" (fun () -> 
+  register "up" (fun () -> 
     Crosshair_.stop_crosshair();
     Crosshair_.move_crosshair (Crosshair_.get_crosshair()) 
                           (Vector.mult Cst.crosshair_speed Cst.up));
 
-  register "k" (fun () -> 
+  register "down" (fun () -> 
     Crosshair_.stop_crosshair();
     Crosshair_.move_crosshair (Crosshair_.get_crosshair()) 
                           (Vector.mult Cst.crosshair_speed Cst.down));
 
-  register "l" (fun () -> 
+  register "right" (fun () -> 
     Crosshair_.stop_crosshair();
     Crosshair_.move_crosshair (Crosshair_.get_crosshair()) 
                           (Vector.mult Cst.crosshair_speed Cst.right));
   
-  register "j" (fun () -> 
+  register "left" (fun () -> 
     Crosshair_.stop_crosshair();
     Crosshair_.move_crosshair (Crosshair_.get_crosshair()) 
                           (Vector.mult Cst.crosshair_speed Cst.left));
@@ -48,7 +48,7 @@ let () =
 
 let () =
 (*Player's movement*)
-    register "w" (fun () -> 
+    register "space" (fun () -> 
       Player.jump (););
 
     register "d" (fun () -> 
@@ -56,7 +56,7 @@ let () =
       Player.move_player (Player.get_player()) 
                             (Vector.mult Cst.player_speed Cst.right));
     
-    register "a" (fun () -> 
+    register "q" (fun () -> 
       Player.stop_player(); 
       Player.move_player (Player.get_player()) 
                             (Vector.mult Cst.player_speed Cst.left));
@@ -86,8 +86,10 @@ let () =
           Global.chrono_bullet := record
       end 
   in
-  register "f" (fun() ->auxilary ()); 
+  register "z" (fun() ->auxilary ()); 
 ;;
+
+
 
 (*
 (p#position#get).x, (p#position#get).y

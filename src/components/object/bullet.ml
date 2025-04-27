@@ -38,11 +38,11 @@ let bullet_stateMachine(id_ : id) =
   let instance : abstract_ai =
     match (Global.get_ai id_) with 
     | Some x -> x  
-    | None -> failwith "Id not found"
+    | None -> failwith "bullet_Id not found"
   in 
   (*If the bullet damaged something and is in contact : immediately self destroy*)
   let result = (instance#impactInfo#get) in 
-  if not(List.is_empty result) then 
+  if not(result = []) then 
     iaBullet_unregister(id_) 
   else 
     ()

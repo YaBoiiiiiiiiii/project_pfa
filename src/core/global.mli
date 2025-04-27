@@ -7,6 +7,7 @@ type t = {
   crosshair : crosshair;
   mutable waiting : int;
   mutable list_ai : abstract_ai list ; (*List of Drawable/Collidable/Destructible items.*)
+  mutable list_block : block list ;
 }
 
 val get : unit -> t
@@ -21,6 +22,9 @@ val add_ai : abstract_ai -> unit
 val get_ai : id -> abstract_ai option 
 val clean_ai : unit -> unit 
 
+
 val postGlobalCreation_assignTexture : texture -> string -> unit 
+
+val assignPlatformTexture : block list -> string -> unit
 
 
