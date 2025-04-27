@@ -73,11 +73,15 @@ Le système possède aussi deux variables `relativeHitbox` et `relativeHurtbox` 
 
 ### IA
 
-C’est le système le plus complexe ajouté :
-- Chaque instance est munie d'une fonction `stateMachine` basée sur une variable `behavior` (entier) pour exécuter différents comportements :
-  - Ex : un ennemi peut attaquer ou rester statique selon `behavior`
-- Chaque instance IA possède un `id` unique pour l’identifier facilement.
-- Une fonction `unregister` permet à une IA de se détruire proprement en se retirant de tous les systèmes.
+C’est le système le plus complexe qu’on a ajouté : elle munit à chacune de ses  instances une fonction “stateMachine” qui a pour objectif de faire exécuter 
+une fonction propre à chaque classe de IA lors de l’exécution du système IA. Cette fonction se base sur la valeur d’une variable “behavior” qui est un entier qui indique à la stateMachine quelle block de code elle doit exécuter : 
+
+
+Par exemple, un ennemi peut avoir 2 “behavior” distincts : Attaque et Dormir. Si behavior est à Attaque, alors stateMachine commandera à l'ennemie d’aller attaquer le joueur. Si behavior est à Dormir, alors stateMachine commandera à ce qui ne fait rien.
+
+Ensuite, le deuxième élément clé du système est que chaque instance de IA possède un attribut “id”, qui leur permet d’être identifiés de manière unique par le programme. Dans global.ml figure une liste d’instance de IA, cette liste permet notamment de retrouver certaines instances grâce à leurs “id”. “id” nous aide aussi à combler un défaut de la structure de notre code : on ne peut pas accéder directement aux champs des instances de classe même depuis leurs fichiers .ml associé. Par conséquent, on utilise leurs id pour rapidement les retrouver. 
+
+Enfin, les instance de IA possèdent aussi une fonction “unregister” : c’est une fonction qui a pour objectif de donner à l’IA de s’auto détruire en retirant l’instance de chaque système
 
 ---
 
